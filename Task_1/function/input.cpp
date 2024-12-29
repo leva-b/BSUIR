@@ -42,6 +42,7 @@ void inputStruct(int i)
 
 void input()
 {
+    free(arr);
     arr = nullptr;
     n = 0, siz = 100;
     int t;

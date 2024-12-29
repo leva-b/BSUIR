@@ -21,7 +21,7 @@ int main()
     std::cout << "3. Количество\n";
     std::cout << "4. Дата произведения\n";
     std::cout << "5. Вес(кг) или объем(мл)\n";
-    std::cout << "6. Партия\n";
+    std::cout << "6. Партия\n\n";
 
     menu();
     while (true)

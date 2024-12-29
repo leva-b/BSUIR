@@ -43,6 +43,18 @@ void writeCurrent(std::ofstream &ofs, int k)
     ofs.write((char *)(&arr[k].party), sizeof(arr[k].party));
 }
 
+void writeCurrent(std::ofstream &ofs, int k, size_t index)
+{
+    ofs.seekp(index * structSize, std::ios::beg);
+    ofs.write((char *)(&arr[k].name), sizeof(arr[k].name));
+    ofs.write((char *)(&arr[k].number), sizeof(arr[k].number));
+    ofs.write((char *)(&arr[k].quantity), sizeof(arr[k].quantity));
+    ofs.write((char *)(&arr[k].date), sizeof(arr[k].date));
+    ofs.write((char *)(&arr[k].isWeight), sizeof(arr[k].isWeight));
+    ofs.write((char *)(&arr[k].Measurement), sizeof(arr[k].Measurement));
+    ofs.write((char *)(&arr[k].party), sizeof(arr[k].party));
+}
+
 void writeCurrent(FILE *file, int k) {
     fwrite(arr[k].name, sizeof(arr[k].name), 1, file);
     fwrite(&arr[k].number, sizeof(arr[k].number), 1, file);
@@ -51,7 +63,7 @@ void writeCurrent(FILE *file, int k) {
     fwrite(&arr[k].isWeight, sizeof(arr[k].isWeight), 1, file);
     fwrite(&arr[k].Measurement, sizeof(arr[k].Measurement), 1, file);
     fwrite(&arr[k].party, sizeof(arr[k].party), 1, file);
-}
+}   
 
 void readCurrent(std::ifstream &ifs, int k)
 {
@@ -92,7 +104,7 @@ void deleteStructFromFile(int indexToDelete) {
     while (position < n* structSize) {
         nextPosition = ftell(file); 
         fseek(file, position, SEEK_SET);
-        writeCurrent1(file, i + 1);
+        writeCurrent(file, i + 1);
         position += structSize; 
         fseek(file, nextPosition, SEEK_SET);
     }

@@ -13,7 +13,9 @@ void change()
     int k;
     std::cout << "Введите номер структуры для изменения от 1 до " << n << " : ";
     std::cin >> k;
+    k--;
     bool isexit = true;
+    std::ofstream ofs("binary.bin", std::ios::in | std::ios::out | std::ios::binary);
     do
     {
         std::cout << "Введите номер признака для изменения информации: ";
@@ -33,37 +35,41 @@ void change()
             std::cout << "Введите новое наименование: ";
             std::cin >> new_name;
             strcpy(arr[k].name, new_name);
+            writeCurrent(ofs, k, k);
             break;
         case 2:
             int new_number;
             std::cout << "Введите новый номер цеха";
             std::cin >> new_number;
             arr[k].number = new_number;
+            writeCurrent(ofs, k, k);
             break;
         case 3:
             int new_quantity;
             std::cout << "Введите новое количество";
             std::cin >> new_quantity;
             arr[k].quantity = new_quantity;
-
+            writeCurrent(ofs, k, k);
             break;
         case 4:
             char new_date[11];
             std::cout << "Введите новую дату: ";
             std::cin >> new_date;
             strcpy(arr[k].date, new_date);
-
+            writeCurrent(ofs, k, k);
             break;
         case 5:
             bool isWeight;
             std::cout << "Введите 0, если указываете вес продукции, или любое другое значение если указываете объем: ";
             std::cin >> isWeight;
+            arr[k].isWeight = isWeight;
             if (!isWeight)
             {
                 float new_weight;
                 std::cout << "Введите новый вес: ";
                 std::cin >> new_weight;
                 arr[k].Measurement.weight = new_weight;
+                writeCurrent(ofs, k, k);
             }
             else
             {
@@ -71,6 +77,7 @@ void change()
                 std::cout << "Введите новый объем(мл): ";
                 std::cin >> new_volume;
                 arr[k].Measurement.volume = new_volume;
+                writeCurrent(ofs, k, k);
             }
 
             break;
@@ -84,6 +91,7 @@ void change()
             else if (new_party_str == "маленькая" || new_party_str == "Маленькая")
                 new_party = false;
             arr[k].party = new_party;
+            writeCurrent(ofs, k, k);
             break;
         default:
             isexit = false;
@@ -91,6 +99,7 @@ void change()
             break;
         }
     } while (!isexit);
+    ofs.close();
 }
 
 void changeAll()
@@ -108,6 +117,7 @@ void changeAll()
         int choice;
         std::cin >> choice;
         isexit = true;
+        std::ofstream ofs("binary.bin", std::ios::in | std::ios::out | std::ios::binary);
         switch (choice)
         {
         case 1:
@@ -122,6 +132,7 @@ void changeAll()
                 if (strcmp(arr[i].name, name) == 0)
                 {
                     strcpy(arr[i].name, new_name);
+                    writeCurrent(ofs, i, i);
                 }
             }
             break;
@@ -137,6 +148,7 @@ void changeAll()
                 if (arr[i].number == number)
                 {
                     arr[i].number = new_number;
+                    writeCurrent(ofs, i, i);
                 }
             }
             break;
@@ -152,6 +164,7 @@ void changeAll()
                 if (arr[i].quantity == quantity)
                 {
                     arr[i].quantity = new_quantity;
+                    writeCurrent(ofs, i, i);
                 }
             }
             break;
@@ -167,6 +180,7 @@ void changeAll()
                 if (strcmp(arr[i].date, date) == 0)
                 {
                     strcpy(arr[i].date, new_date);
+                    writeCurrent(ofs, i, i);
                 }
             }
             break;
@@ -186,7 +200,9 @@ void changeAll()
                 {
                     if (!arr[i].isWeight && arr[i].Measurement.weight == weight)
                     {
+                        arr[i].isWeight = isWeight;
                         arr[i].Measurement.weight = new_weight;
+                        writeCurrent(ofs, i, i);
                     }
                 }
             }
@@ -202,7 +218,9 @@ void changeAll()
                 {
                     if (arr[i].isWeight && arr[i].Measurement.volume == volume)
                     {
+                        arr[i].isWeight = isWeight;
                         arr[i].Measurement.volume = new_volume;
+                        writeCurrent(ofs, i, i);
                     }
                 }
             }
@@ -224,11 +242,13 @@ void changeAll()
                 new_party = true;
             else if (party_str == "маленькая" || party_str == "Маленькая")
                 new_party = false;
+
             for (int i = 0; i < n; i++)
             {
                 if (arr[i].party == party)
                 {
                     arr[i].party = new_party;
+                    writeCurrent(ofs, i, i);
                 }
             }
             break;
@@ -237,5 +257,6 @@ void changeAll()
             std::cout << "Неправильный ввод ";
             break;
         }
+        ofs.close();
     } while (!isexit);
 }

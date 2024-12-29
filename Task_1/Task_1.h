@@ -47,6 +47,7 @@ void changeAll();
 void shekerSort();
 void inputBinary();
 void writeCurrent(ofstream&, int);
+void writeCurrent(std::ofstream &ofs, int k, size_t index);
 void writeCurrent(FILE *, int); 
 void readCurrent(ifstream&, int);
 void deleteStructFromFile(int indexToDelete);
