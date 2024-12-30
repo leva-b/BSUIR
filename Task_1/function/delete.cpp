@@ -145,7 +145,7 @@ void deleteStruct()
 
         while (ss >> number)
         {
-            numbers.push_back(number); // Добавляем число в вектор
+            numbers.push_back(number);
         }
         int count = 0;
         sort(numbers.begin(), numbers.end());

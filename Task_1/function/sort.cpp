@@ -37,12 +37,16 @@ void shekerSort()
         if(flag == 0) break;
     }
     int count = 0;
+    std::ofstream ofs;
+    ofs.open("binary.bin", std::ios::out | std::ios::binary);
     for(int i = 0; i < n; i++){
-        if(arr[i].number = factory){
+        writeCurrent(ofs, i);
+        if(arr[i].number == factory){
             viewOneStruct(i);
             count++;
         }
     }
+    ofs.close();
     if(!count){
         std::cout << "Информации по продукции данного цеха нет\n\n";
     }

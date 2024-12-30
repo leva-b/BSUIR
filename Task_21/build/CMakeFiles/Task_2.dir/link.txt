@@ -1,0 +1,1 @@
+/usr/bin/c++ CMakeFiles/Task_2.dir/function/change.cpp.o CMakeFiles/Task_2.dir/function/delete.cpp.o CMakeFiles/Task_2.dir/function/input.cpp.o CMakeFiles/Task_2.dir/function/menu.cpp.o CMakeFiles/Task_2.dir/function/sort.cpp.o CMakeFiles/Task_2.dir/function/txt.cpp.o CMakeFiles/Task_2.dir/function/viewArray.cpp.o CMakeFiles/Task_2.dir/main.cpp.o -o Task_2 

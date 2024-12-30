@@ -3,15 +3,13 @@ using namespace std;
 
 product *arr = nullptr;
 int n = 0, siz = 100;
-int structSize = sizeof(arr[0].name) +
-                     sizeof(arr[0].number) +
-                     sizeof(arr[0].quantity) +
-                     sizeof(arr[0].date) +
-                     sizeof(arr[0].isWeight) +
-                     sizeof(arr[0].Measurement) +
-                     sizeof(arr[0].party);
-
-
+int structSize = sizeof(((product *)0)->name) +
+                 sizeof(((product *)0)->number) +
+                 sizeof(((product *)0)->quantity) +
+                 sizeof(((product *)0)->date) +
+                 sizeof(((product *)0)->Measurement) +
+                 sizeof(((product *)0)->isWeight) +
+                 sizeof(((product *)0)->party);
 
 int main()
 {
@@ -60,7 +58,8 @@ int main()
             exit = true;
             break;
         }
-        if(exit)break;
+        if (exit)
+            break;
     }
     free(arr);
 }

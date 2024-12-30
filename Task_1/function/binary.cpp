@@ -93,23 +93,26 @@ void deleteStructFromFile(int indexToDelete) {
         return;
     }
 
-    product nextProduct;
-    int position = structSize * indexToDelete;
-    long nextPosition;
+    // Позиция записи, которую нужно удалить
+    long positionToDelete = structSize * indexToDelete;
 
-    fseek(file, position, SEEK_SET);
+    // Сдвиг всех последующих записей
+    for (int i = indexToDelete + 1; i < totalRecords; i++) {
+        // Вычисляем позицию текущей записи
+        long currentPosition = structSize * i;
+        fseek(file, currentPosition, SEEK_SET);
+        product nextProduct;
+        
+        // Читаем следующую запись
+        fread(&nextProduct, structSize, 1, file);
 
-    
-    int i = position;
-    while (position < n* structSize) {
-        nextPosition = ftell(file); 
-        fseek(file, position, SEEK_SET);
-        writeCurrent(file, i + 1);
-        position += structSize; 
-        fseek(file, nextPosition, SEEK_SET);
+        // Перемещаем указатель на позицию для записи
+        fseek(file, currentPosition - structSize, SEEK_SET);
+        fwrite(&nextProduct, structSize, 1, file);
     }
 
-    ftruncate(fileno(file), position);
+    // Уменьшаем размер файла
+    ftruncate(fileno(file), fileSize - structSize);
 
     fclose(file);
 }
